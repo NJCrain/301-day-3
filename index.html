@@ -8,25 +8,44 @@
     <link rel= "stylesheet" href = "css/reset.css">
     <link rel= "stylesheet" href ="css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat+Alternates|Roboto" rel="stylesheet">
+
+    <script id="horns-handlebars" type="text/x-handlebars-template">      
+      <section data-keyword="{{keyword}}">
+      <h2> {{title}}</h2>
+      <img src="{{url}}" alt="{{keyword}}">
+      <p>{{description}}</p>
+      </section>
+    </script>
+
+    <script id="options-handlebars" type="text/x-handlebars-template">
+      <option value="{{keyword}}">{{keyword}}</option>
+    </script>
    
   </head>
   <body>
     <header>
       <h1>The Gallery of Horns</h1>
+    <nav>
+      <div>
+        <button value="page1">Page 1</button>
+        <button value="page2">Page 2</button> 
+     </div>
+     <div>
+        <button value="sortHorn">Sort by Numbers of Horns</button> 
+        <button value="sortKeyword">Sort by Keyword</button> 
+    </div>
       <select>
         <option value="default">Filter by Keyword</option>
       </select>
+    </nav>
     </header>
     <main>
-      <section id="photo-template">
-        <h2></h2>
-        <img src="" alt="">
-        <p></p>
-      </section>
+
     </main>
     <footer>
       &copy; 2018 Code Fellows
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.min.js"></script>
     <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="

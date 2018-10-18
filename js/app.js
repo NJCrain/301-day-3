@@ -12,47 +12,62 @@ function Horned(animalObject) {
   objArray.push(this);
 }
 
+function sortByKey(arr) {
+  arr.sort((a, b) => {
+    if (a.keyword > b.keyword) {
+      return 1;
+    }
+    else if (a.keyword < b.keyword) {
+      return -1;
+    }
+    else {return 0;}
+  });
+}
 
-Horned.prototype.render = function() {
-  //refactor for handlebars
-  $('main').append('<div id="copy"></div>');
-  let $imgContainer = $('div[id = "copy"]');
-  let $imgTemplate = $('#photo-template').html();
+function sortByHorns(arr) {
+  arr.sort((a, b) => {
+    if (parseInt(a.horns) > parseInt(b.horns)) {
+      return 1;
+    }
+    else if (parseInt(a.horns) < parseInt(b.horns)) {
+      return -1;
+    }
+    else {return 0;}
+  });
+}
 
-
-  $imgContainer.html($imgTemplate);
-
-  $imgContainer.find('img').attr('src', this.url);
-  $imgContainer.attr('data-keyword', this.keyword);
-  $imgContainer.find('img').attr('data-horns', this.horns);
-  $imgContainer.find('img').attr('alt', this.keyword);
-  $imgContainer.find('h2').text(this.title);
-  $imgContainer.find('p').text(this.description);
-
-  $imgContainer.removeAttr('id');
+function renderAnyHandlebars(sourceId, data, target) {
+  let template = Handlebars.compile($(sourceId).html());
+  let newHtml = template(data);
+  $(target).append(newHtml);
 }
 
 //render all images
 function renderImages() {
   objArray.forEach(obj => {
-    obj.render();
+  renderAnyHandlebars('#horns-handlebars', obj, 'main');
   });
 checkKeywords();
 addOptionEl();
 }
 
 //read data and create objects
-//page selected param
- function readData() {
-   $.get('../data/page-1.json', data => {
+ function readData(dataFile='page-1') {
+  $('main').html('');
+   resetData();
+   $.get(`./data/${dataFile}.json`, data => {
      data.forEach(obj => {
        new Horned(obj);
      });
-   }).then(renderImages);
+   }).then(() => {sortByKey(objArray)}).then(renderImages);
+ }
+
+ function resetData() {
+   objArray.length = 0;
+   keywordArray.length = 0;
  }
 
 function checkKeywords() {
-
   objArray.forEach(obj => {
     if (!keywordArray.includes(obj.keyword)) {
       keywordArray.push(obj.keyword);
@@ -61,21 +76,40 @@ function checkKeywords() {
 }
 
 function addOptionEl() {
+  $('select').html('<option value="default">Filter by Keyword</option>');
   keywordArray.forEach(keyword => {
-    $('select').append('<option id = "temp"></option>');
-    $('#temp').text(keyword).attr('value', keyword).removeAttr('id');
+    let keywordObj = {
+      'keyword': keyword,
+    }
+
+    renderAnyHandlebars('#options-handlebars', keywordObj, 'select');
   });
 }
 
 readData(); 
-addOptionEl();
 
 $('select').on('change', function(){
   let $select = $(this).val();
-  $('div').hide();
-  $(`div[data-keyword="${$select}"]`).show();
-})
+  $('section').hide();
+  $(`section[data-keyword="${$select}"]`).show();
+});
 
-//button submit handler
-  //delete all main content
-  //re-render with targeted JSON
+$('button[value="page1"]').on('click', () => {
+  readData('page-1');
+});
+$('button[value="page2"]').on('click', () => {
+  readData('page-2');
+});
+
+$('button[value="sortHorn"]').on('click', () => {
+  $('main').html('');
+  sortByHorns(objArray);
+  renderImages();
+});
+
+$('button[value="sortKeyword"]').on('click', () => {
+  $('main').html('');
+  sortByKey(objArray);
+  renderImages();
+});
+
