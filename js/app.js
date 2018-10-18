@@ -13,25 +13,6 @@ function Horned(animalObject) {
 }
 
 
-Horned.prototype.render = function() {
-  //refactor for handlebars
-  $('main').append('<div id="copy"></div>');
-  let $imgContainer = $('div[id = "copy"]');
-  let $imgTemplate = $('#photo-template').html();
-
-
-  $imgContainer.html($imgTemplate);
-
-  $imgContainer.find('img').attr('src', this.url);
-  $imgContainer.attr('data-keyword', this.keyword);
-  $imgContainer.find('img').attr('data-horns', this.horns);
-  $imgContainer.find('img').attr('alt', this.keyword);
-  $imgContainer.find('h2').text(this.title);
-  $imgContainer.find('p').text(this.description);
-
-  $imgContainer.removeAttr('id');
-}
-
 function renderAnyHandlebars(sourceId, data, target) {
   let template = Handlebars.compile($(sourceId).html());
   let newHtml = template(data);
@@ -67,10 +48,12 @@ function checkKeywords() {
 }
 
 function addOptionEl() {
-//refactor to handlebars
   keywordArray.forEach(keyword => {
-    $('select').append('<option id = "temp"></option>');
-    $('#temp').text(keyword).attr('value', keyword).removeAttr('id');
+    let keywordObj = {
+      'keyword': keyword,
+    }
+
+    renderAnyHandlebars('#options-handlebars', keywordObj, 'select');
   });
 }
 
@@ -79,8 +62,8 @@ addOptionEl();
 
 $('select').on('change', function(){
   let $select = $(this).val();
-  $('div').hide();
-  $(`div[data-keyword="${$select}"]`).show();
+  $('section').hide();
+  $(`section[data-keyword="${$select}"]`).show();
 })
 
 //button submit handler

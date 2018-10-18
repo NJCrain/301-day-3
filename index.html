@@ -8,13 +8,15 @@
     <link rel= "stylesheet" href = "css/reset.css">
     <link rel= "stylesheet" href ="css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat+Alternates|Roboto" rel="stylesheet">
+    
     <script id="horns-handlebars" type="text/x-handlebars-template">      
-      <section id="photo-template">
+      <section data-keyword="{{keyword}}">
       <h2> {{title}}</h2>
       <img src="{{url}}" alt="{{keyword}}">
       <p>{{description}}</p>
       </section>
     </script>
+
     <script id="options-handlebars" type="text/x-handlebars-template">
       <option value="{{keyword}}">{{keyword}}</option>
     </script>
