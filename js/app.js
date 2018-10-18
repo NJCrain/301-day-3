@@ -26,7 +26,6 @@ function sortByKey(arr) {
 
 function sortByHorns(arr) {
   arr.sort((a, b) => {
-    // console.log(a.horns, b.horns);
     if (parseInt(a.horns) > parseInt(b.horns)) {
       return 1;
     }
@@ -56,7 +55,7 @@ addOptionEl();
  function readData(dataFile='page-1') {
   $('main').html('');
    resetData();
-   $.get(`../data/${dataFile}.json`, data => {
+   $.get(`./data/${dataFile}.json`, data => {
      data.forEach(obj => {
        new Horned(obj);
      });
@@ -94,10 +93,6 @@ $('select').on('change', function(){
   $('section').hide();
   $(`section[data-keyword="${$select}"]`).show();
 });
-
-//button submit handler
-  //delete all main content
-  //re-render but sorted
 
 $('button[value="page1"]').on('click', () => {
   readData('page-1');
