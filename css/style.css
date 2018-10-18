@@ -18,6 +18,31 @@ header{
   text-align:center;
 }
 
+nav {
+  display: flex;
+  justify-content: space-around;
+}
+
+div {
+  display: flex;
+  width: 6em;
+  justify-content: space-around;
+}
+
+button {
+  background-color: silver;
+  border: none;
+  border-radius: 8%;
+  color: black;
+  cursor: pointer;
+  font-size: 16px;
+  max-width: 45%;
+}
+
+button:hover {
+  background-color: #d3d3d3;
+}
+
 select{
   background-color: silver;
   border: none;
