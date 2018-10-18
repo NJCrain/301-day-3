@@ -1,11 +1,15 @@
 body{
   background-color: black;
   width: 100%;
-  /* make flex box */
+  display: flex;
+  flex-direction: column;
 }
 
 main {
-  /* make flex box */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 header{
   color:cornsilk;
@@ -26,9 +30,9 @@ select{
 section{
   height: 25em;
   width:30em;
-  float: left;
   margin-top: 3em;
-
+  display: flex;
+  flex-direction: column;
 }
 h2{
   color: cornsilk;
