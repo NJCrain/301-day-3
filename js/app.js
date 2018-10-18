@@ -32,10 +32,16 @@ Horned.prototype.render = function() {
   $imgContainer.removeAttr('id');
 }
 
+function renderAnyHandlebars(sourceId, data, target) {
+  let template = Handlebars.compile($(sourceId).html());
+  let newHtml = template(data);
+  $(target).append(newHtml);
+}
+
 //render all images
 function renderImages() {
   objArray.forEach(obj => {
-    obj.render();
+  renderAnyHandlebars('#horns-handlebars', obj, 'main');
   });
 checkKeywords();
 addOptionEl();
@@ -61,6 +67,7 @@ function checkKeywords() {
 }
 
 function addOptionEl() {
+//refactor to handlebars
   keywordArray.forEach(keyword => {
     $('select').append('<option id = "temp"></option>');
     $('#temp').text(keyword).attr('value', keyword).removeAttr('id');

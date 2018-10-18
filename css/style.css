@@ -23,7 +23,7 @@ select{
   padding: 16px;
 }
 
-div{
+section{
   height: 25em;
   width:30em;
   float: left;
