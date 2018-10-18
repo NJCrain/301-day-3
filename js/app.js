@@ -29,17 +29,22 @@ addOptionEl();
 }
 
 //read data and create objects
-//page selected param
- function readData() {
-   $.get('../data/page-1.json', data => {
+ function readData(dataFile='page-1') {
+   resetData();
+   $.get(`../data/${dataFile}.json`, data => {
      data.forEach(obj => {
        new Horned(obj);
      });
    }).then(renderImages);
  }
 
-function checkKeywords() {
+ function resetData() {
+   $('main').html('');
+   objArray.length = 0;
+   keywordArray.length = 0;
+ }
 
+function checkKeywords() {
   objArray.forEach(obj => {
     if (!keywordArray.includes(obj.keyword)) {
       keywordArray.push(obj.keyword);
@@ -48,6 +53,7 @@ function checkKeywords() {
 }
 
 function addOptionEl() {
+  $('select').html('<option value="default">Filter by Keyword</option>');
   keywordArray.forEach(keyword => {
     let keywordObj = {
       'keyword': keyword,
@@ -69,3 +75,11 @@ $('select').on('change', function(){
 //button submit handler
   //delete all main content
   //re-render with targeted JSON
+
+$('button[value="page1"]').on('click', () => {
+  readData('page-1');
+});
+$('button[value="page2"]').on('click', () => {
+  readData('page-2');
+});
+
