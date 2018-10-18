@@ -54,6 +54,7 @@ addOptionEl();
 
 //read data and create objects
  function readData(dataFile='page-1') {
+  $('main').html('');
    resetData();
    $.get(`../data/${dataFile}.json`, data => {
      data.forEach(obj => {
@@ -63,7 +64,6 @@ addOptionEl();
  }
 
  function resetData() {
-   $('main').html('');
    objArray.length = 0;
    keywordArray.length = 0;
  }
@@ -88,7 +88,6 @@ function addOptionEl() {
 }
 
 readData(); 
-addOptionEl();
 
 $('select').on('change', function(){
   let $select = $(this).val();
@@ -107,7 +106,15 @@ $('button[value="page2"]').on('click', () => {
   readData('page-2');
 });
 
-$('button[value="sortKeyword"]').on('click', () => {
+$('button[value="sortHorn"]').on('click', () => {
+  $('main').html('');
+  sortByHorns(objArray);
+  renderImages();
+});
 
+$('button[value="sortKeyword"]').on('click', () => {
+  $('main').html('');
+  sortByKey(objArray);
+  renderImages();
 });
 
