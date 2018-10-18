@@ -1,0 +1,73 @@
+body{
+  background-color: black;
+  width: 100%;
+  /* make flex box */
+}
+
+main {
+  /* make flex box */
+}
+header{
+  color:cornsilk;
+  font-family: 'Montserrat Alternates', sans-serif;
+  font-size: 2.75em;
+  text-align:center;
+}
+
+select{
+  background-color: silver;
+  border: none;
+  color: black;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 16px;
+}
+
+div{
+  height: 25em;
+  width:30em;
+  float: left;
+  margin-top: 3em;
+
+}
+h2{
+  color: cornsilk;
+  font-family: 'Montserrat Alternates', sans-serif;
+  font-size: 1.75em;
+  text-align: center;
+}
+
+img{
+  display: block;
+  margin: auto;
+  height: 90%;
+  width: 90%;
+  z-index: 5;
+}
+
+img:hover ~p{
+  visibility: visible;
+}
+
+img:hover{
+  opacity: .5;
+}
+
+p{
+  bottom: 7em;
+  color: cornsilk;
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+  position: relative;
+  margin: auto;
+  text-align: center;
+  visibility: hidden;
+  width: 90%;  
+}
+
+footer{
+color: cornsilk;
+clear:both;
+padding-top: 5em;
+text-align: center;
+}
