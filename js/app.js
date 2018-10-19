@@ -12,12 +12,12 @@ function Horned(animalObject) {
   objArray.push(this);
 }
 
-function sortByKey(arr) {
+function sortByTitle(arr) {
   arr.sort((a, b) => {
-    if (a.keyword > b.keyword) {
+    if (a.title > b.title) {
       return 1;
     }
-    else if (a.keyword < b.keyword) {
+    else if (a.title < b.title) {
       return -1;
     }
     else {return 0;}
@@ -59,7 +59,7 @@ addOptionEl();
      data.forEach(obj => {
        new Horned(obj);
      });
-   }).then(() => {sortByKey(objArray)}).then(renderImages);
+   }).then(() => {sortByTitle(objArray)}).then(renderImages);
  }
 
  function resetData() {
@@ -109,7 +109,7 @@ $('button[value="sortHorn"]').on('click', () => {
 
 $('button[value="sortKeyword"]').on('click', () => {
   $('main').html('');
-  sortByKey(objArray);
+  sortByTitle(objArray);
   renderImages();
 });
 
